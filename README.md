@@ -57,7 +57,7 @@ for(var i=0; i<10; i++){
 }
 ```
 Cette technique permet de capturer la valeur de ```i``` dans la boucle et d'atteindre le résultat attendu. 
-De façon général, un IIFE se présente de la sorte:
+De façon générale, un IIFE se présente de la sorte:
 
 L'on construit une fonction que l'on exécute immédiatement en lui passant en paramètre la valeur à capturer. Le paramètre de cette fonction est alors utilisé pour construire une nouvelle fonction dont l'éxécution n'est pas altérée par les modifications ultérieures de la variable passée en paramètre de la fonction englobante.
 >Exemple:
