@@ -77,7 +77,6 @@ En Javascript, ce modèle permet le partage de resources. Il permet d'assurer qu
 >Exemple:
 ```js
 var LoginService = (function() {
-
    var service;
    function init() {
         var utilisateur;
@@ -92,7 +91,6 @@ var LoginService = (function() {
             }
         }
    }
-   
    return {
         getService: function() {
             if(!service) {
@@ -102,7 +100,6 @@ var LoginService = (function() {
         }
    }
 })();
-
 var serviceA = LoginService.getService();
 var serviceB = LoginService.getService();
 console.log(serviceA === serviceB); // affiche true
