@@ -77,36 +77,36 @@ myFunction(); // Affiche Original value
 Ce modèle de conception permet d'exposer des méthodes et variables publics tout en maintenant des méthodes et variables privées au sein d'un objet. Il utilise le concept de **IIFE** pour (*Immediately-Invoked Functional Expression*). A la différence de *IIFE* qui renvoie une fonction, le module est un objet renvoyé par une expression fonctionnelle immédiatement exécutée. 
 > Exemple:
 ```js
-var ModuleMaison = (function(){
+var Home = (function(){
     var temperature = 20;
-    var porteOuverte = false;
+    var doorOpen = false;
     return {
-        augmenterLaTemperature: function() {
+        increaseTemp: function() {
             temperature++;
             return temperature;
         },
-        baisserLaTemperature: function() {
+        decreaseTemp: function() {
             temperature--;
             return temperature;
         },
-        ouvrirLaPorte: function() {
-            porteOuverte = true;
+        openDoor: function() {
+            doorOpen = true;
             return true;
         },
-        fermerLaPorte: function() {
-            porteOuverte = false;
+        closeDoor: function() {
+            doorOpen = false;
             return false;
         }
     }
 })();
 ```
->Dans l'exemple ci-dessus où l'on simule une automatisation de maison, les variables ```temperature``` et ```porteOuverte``` sont des *variables privés* de notre module. L'on ne peut y accéder qu'aux travers des méthodes publiques exposées par le module, dans notre cas ```augmenterLaTemperature```, ```baisserLaTemperature```, ```ouvrirLaPorte``` et ```fermerLaPorte```.
+>Dans l'exemple ci-dessus où l'on simule une automatisation de maison, les variables ```temperature``` et ```doorOpen``` sont des *variables privées* de notre module. L'on ne peut y accéder qu'à travers les méthodes publiques exposées par le module, dans notre cas ```increaseTemp```, ```decreaseTemp```, ```openDoor``` et ```closeDoor```.
 
 ### Avantages
 * La possibilité de créer des variables privées permet l'*encapsulation* de parties de code dont on souhaite sécuriser la manipulation. Ceci est particulièrement important lorsque l'on développe un *framework* ou une *api*.
 
 ### Désavantages
-* Ce modèle peut rendre difficile la mise en place de tests automatisés des méthodes et variables privées
+* Ce modèle peut rendre difficile la mise en place de tests automatisés des méthodes et variables privées.
 
 ## Singleton
 En Javascript, ce modèle permet le partage de resources. Il permet d'assurer qu'une même référence d'un objet est utilisée dans plusieurs parties de notre application. 
@@ -115,14 +115,14 @@ En Javascript, ce modèle permet le partage de resources. Il permet d'assurer qu
 var LoginService = (function() {
    var service;
    function init() {
-        var utilisateur;
+        var user;
         return {
-            login: function(email, motDePasse) {
+            login: function(email, password) {
                 ...
             },
             logout: function() {
                 ...
-                utilisateur = null;
+                user = null;
             }
         }
    }
