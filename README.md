@@ -35,7 +35,9 @@ function PersonBad(firstname, lastname, age, sex) {
 ```
 Chaque objet créé avec le constructeur ```PersonBad``` aura sa propre copie de la méthode ```fullname``` qui est recréée à  chaque appel à  ```new PersonBad(...)```.
 ## IIFE (Immediately-Invoked Functional Expression)
-Cette technique permet de capturer l'état d'une variable à un moment donné et de l'utiliser dans la définition d'une fonction 
+Cette technique permet de capturer l'état d'une variable à un moment donné et de l'utiliser dans la définition d'une fonction de sorte que le fonctionnement de la fonction ne soit pas affecté par des modifications ultérieures de la variable.
+>Exemple:
+
 ## Module
 Ce modèle de conception permet d'exposer des méthodes et variables publics tout en maintenant des méthodes et variables privées au sein d'un objet. Il utilise le concept de **IIFE** pour (*Immediately-Invoked Functional Expression*). A la différence de *IIFE* qui renvoie une fonction, le module est un objet renvoyé par une expression fonctionnelle immédiatement exécutée. 
 > Exemple:
