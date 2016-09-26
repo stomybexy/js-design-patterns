@@ -74,7 +74,7 @@ myFunction(); // Affiche Original value
 ```
 
 ## Module
-Ce modèle de conception permet d'exposer des méthodes et variables publics tout en maintenant des méthodes et variables privées au sein d'un objet. Il utilise le concept de **IIFE** pour (*Immediately-Invoked Functional Expression*). A la différence de *IIFE* qui renvoie une fonction, le module est un objet renvoyé par une expression fonctionnelle immédiatement exécutée. 
+Ce modèle de conception permet d'exposer des méthodes et variables publiques tout en maintenant des méthodes et variables privées au sein d'un objet. Il utilise le concept de **IIFE** pour (*Immediately-Invoked Functional Expression*). A la différence de *IIFE* qui renvoie une fonction, le module est un objet renvoyé par une expression fonctionnelle immédiatement exécutée. 
 > Exemple:
 ```js
 var Home = (function(){
