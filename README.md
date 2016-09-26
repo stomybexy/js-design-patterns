@@ -64,7 +64,7 @@ var ModuleMaison = (function(){
     }
 })();
 ```
->Dans l'exemple ci-dessus oC9 l'on simule une automatisation de maison, les variables ```temperature``` et ```porteOuverte``` sont des *variables privés* de notre module. L'on ne peut y accéder qu'aux travers des méthodes publiques exposées par le module, dans notre cas ```augmenterLaTemperature```, ```baisserLaTemperature```, ```ouvrirLaPorte``` et ```fermerLaPorte```.
+>Dans l'exemple ci-dessus où l'on simule une automatisation de maison, les variables ```temperature``` et ```porteOuverte``` sont des *variables privés* de notre module. L'on ne peut y accéder qu'aux travers des méthodes publiques exposées par le module, dans notre cas ```augmenterLaTemperature```, ```baisserLaTemperature```, ```ouvrirLaPorte``` et ```fermerLaPorte```.
 
 ### Avantages
 * La possibilité de créer des variables privées permet l'*encapsulation* de parties de code dont on souhaite sécuriser la manipulation. Ceci est particulièrement important lorsque l'on développe un *framework* ou une *api*.
