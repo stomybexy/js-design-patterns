@@ -1,9 +1,9 @@
 # Modèles de conception en Javascript
 
 ## Prototype
-Le modèle **Prototype** est un modèle de conception consistant C  créer un objet C  partir d'un patron dont il est le clone. Cet objet *patron* est le prototype de l'objet créé. 
-Ce modèle est intégré dans Javascript qui est un langage C  prototypes.
-En javascript on définit un prototype en créant une fonction *constructeur*. On utilise le mot clé ```this``` pour définir les propriétés dont hériteront les objets créés C  partir de ce prototype.
+Le modèle **Prototype** est un modèle de conception consistant à créer un objet à partir d'un patron dont il est le clone. Cet objet *patron* est le prototype de l'objet créé. 
+Ce modèle est intégré dans Javascript qui est un langage à prototypes.
+En javascript on définit un prototype en créant une fonction *constructeur*. On utilise le mot clé ```this``` pour définir les propriétés dont hériteront les objets créés à partir de ce prototype.
 
 >Exemple: 
 ```js
@@ -20,8 +20,8 @@ var jo = new Person('John', 'Travolta', 45, 'M');
 var ben = new Person('Benois', 'Koenig', 35, 'M');
 ```
 >```Person.prototype``` est le protype des objets ```jo``` et ```ben```. ```Person``` est la fonction ```constructeur```.
->En définissant la *méthode*  ```fullname```en dehors de la fonction constructeur, on s'assure qu'elle est partagée entre toutes les instances créées C  partir de ce prototype et qu'elle n'est donc pas redéfinie C  chaque instanciation d'objet.
-Cette méthode de définition des *méthodes* est C  préférer C  celle ci-dessous:
+>En définissant la *méthode*  ```fullname```en dehors de la fonction constructeur, on s'assure qu'elle est partagée entre toutes les instances créées à partir de ce prototype et qu'elle n'est donc pas redéfinie à chaque instanciation d'objet.
+Cette méthode de définition des *méthodes* est à préférer à celle ci-dessous:
 ```js
 function PersonBad(firstname, lastname, age, sex) {
     this.firstname = firstname;
@@ -33,9 +33,9 @@ function PersonBad(firstname, lastname, age, sex) {
     }
 }
 ```
-Chaque objet créé avec le constructeur ```PersonBad``` aura sa propre copie de la méthode ```fullname``` qui est recréée C  chaque appel C  ```new PersonBad(...)```.
+Chaque objet créé avec le constructeur ```PersonBad``` aura sa propre copie de la méthode ```fullname``` qui est recréée à  chaque appel à  ```new PersonBad(...)```.
 ## IIFE (Immediately-Invoked Functional Expression)
-Cette technique permet de capturer l'état d'une variable C  un moment donné et de l'utiliser dans la définition d'une fonction 
+Cette technique permet de capturer l'état d'une variable à un moment donné et de l'utiliser dans la définition d'une fonction 
 ## Module
 Ce modèle de conception permet d'exposer des méthodes et variables publics tout en maintenant des méthodes et variables privées au sein d'un objet. Il utilise le concept de **IIFE** pour (*Immediately-Invoked Functional Expression*). A la différence de *IIFE* qui renvoie une fonction, le module est un objet renvoyé par une expression fonctionnelle immédiatement exécutée. 
 > Exemple:
@@ -43,7 +43,6 @@ Ce modèle de conception permet d'exposer des méthodes et variables publics tou
 var ModuleMaison = (function(){
     var temperature = 20;
     var porteOuverte = false;
-    
     return {
         augmenterLaTemperature: function() {
             temperature++;
@@ -73,7 +72,7 @@ var ModuleMaison = (function(){
 * Ce modèle peut rendre difficile la mise en place de tests automatisés des méthodes et variables privées
 
 ## Singleton
-En Javascript, ce modèle permet le partage de resources. Il permet d'assurer qu'une mC*me référence d'un objet est utilisée dans plusieurs parties de notre application. 
+En Javascript, ce modèle permet le partage de resources. Il permet d'assurer qu'une même référence d'un objet est utilisée dans plusieurs parties de notre application. 
 >Exemple:
 ```js
 var LoginService = (function() {
