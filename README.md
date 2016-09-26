@@ -79,7 +79,6 @@ var LoginService = (function() {
    var service;
    function init() {
         var utilisateur;
-        
         return {
             login: function(email, motDePasse) {
                 ...
@@ -106,6 +105,5 @@ console.log(serviceA === serviceB); // affiche true
 > A noter que ```LoginService``` est un module.
 
 ## Observer
-
-C'est un modèle de conception oC9 un objet (le *subjet*) maintient une liste d'objets dépendants (les *observers*) qu'il notifie en cas de changement de son état.
+C'est un modèle de conception où un objet (le *subjet*) maintient une liste d'objets dépendants (les *observers*) qu'il notifie en cas de changement de son état.
 L'on peut inscrire et désinscrire un objet (*observer*) de ces notifications.
