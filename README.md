@@ -60,10 +60,34 @@ function PersonBad(firstname, lastname, age, sex) {
 }
 ```
 Chaque objet créé avec le constructeur ```PersonBad``` aura sa propre copie de la méthode ```fullname``` qui est recréée à  chaque appel à  ```new PersonBad(...)```.
+
+### Avantages
+* L'usage des prototypes rend le code plus facile à maintenir. Dans notre exemple, si plutard nous changeons le contenu de la fonction fullname, ou si nous souhaitons ajouter une nouvelle méthode *isOld*, il nous suffirait de modifier le *prototype*.
+* Il améliore la testabilité de notre code. En effet, la possibilité de modifier le comportement de tous les objets créés à partir d'un même prototype en modifiant juste le prototype permet l'usage aisé de mocks.
+
+### Inconvénients
+* Il ne permet pas l'accès à des membres privés. Dans l'exemple ci-dessous, nous utilisons dans la fonction *constructor* une variable privée *privateVar* inaccessible aux méthodes définie en dehors de la fonction.
+>Exemple: 
+
+```js
+function Person() {
+    var privateVar = 4;
+    
+    this.internalMeth = function() {
+        console.log(privateVar); // This is OK  privateVar == 4
+    }
+}
+
+Person.prototype.externalMeth = function() {
+    console.log(privateVar); // Not OK - privateVar is undefined
+}
+```
 ## IIFE (Immediately-Invoked Functional Expression)
 Cette technique permet de capturer l'état d'une variable à un moment donné et de l'utiliser dans la définition d'une fonction de sorte que le fonctionnement de la fonction ne soit pas affecté par des modifications ultérieures de la variable.
+
 >Exemple:
 * Without *IIFE*
+
 ```js
 for(var i=0; i<10; i++){
         setTimeout(function() {
@@ -73,6 +97,7 @@ for(var i=0; i<10; i++){
 ```
 >Ce code affichera uniquement ```10```, la dernière valeur de ```i```. En effet, du fait de ```setTimeout``` l'exécution de la boucle ```for``` précède celle de ```console.log(i)```. Ainsi lorsque le code ```console.log(i)``` s'éxécute`,```i``` a la valeur ```10```. Pour remédier à cela et afficher ```0 ... 9``` de façon *asynchrone* (après la boucle for), l'on peut utiliser la construction suivante:
 * With IIFE
+
 ```js
 for(var i=0; i<10; i++){
     (function(val) {
@@ -98,10 +123,15 @@ var myFunction = (function(value){
 toCapture = 'Modified';
 myFunction(); // Affiche Original value
 ```
+=> [Voir dans jsfiddle](https://jsfiddle.net/jonsom/r8a7Lfw1/2/)
 
 ## Module
 Ce modèle de conception permet d'exposer des méthodes et variables publiques tout en maintenant des méthodes et variables privées au sein d'un objet. Il utilise le concept de **IIFE** pour (*Immediately-Invoked Functional Expression*). A la différence de *IIFE* qui renvoie une fonction, le module est un objet renvoyé par une expression fonctionnelle immédiatement exécutée. 
+
 > Exemple:
+>Dans l'exemple ci-dessus où l'on simule une automatisation de maison, les variables ```temperature``` et ```doorOpen``` sont des *variables privées* de notre module. L'on ne peut y accéder qu'à travers les méthodes publiques exposées par le module, dans notre cas ```increaseTemp```, ```decreaseTemp```, ```openDoor``` et ```closeDoor```.
+=> Voir [jsfiddle](https://jsfiddle.net/jonsom/60Lqqfnf/)
+
 ```js
 var Home = (function(){
     var temperature = 20;
@@ -122,11 +152,17 @@ var Home = (function(){
         closeDoor: function() {
             doorOpen = false;
             return false;
+        },
+        getStatus: function() {
+           return {
+                temperature: temperature,
+                doorOpen: doorOpen
+           };
         }
     }
 })();
 ```
->Dans l'exemple ci-dessus où l'on simule une automatisation de maison, les variables ```temperature``` et ```doorOpen``` sont des *variables privées* de notre module. L'on ne peut y accéder qu'à travers les méthodes publiques exposées par le module, dans notre cas ```increaseTemp```, ```decreaseTemp```, ```openDoor``` et ```closeDoor```.
+
 
 ### Avantages
 * La possibilité de créer des variables privées permet l'*encapsulation* de parties de code dont on souhaite sécuriser la manipulation. Ceci est particulièrement important lorsque l'on développe un *framework* ou une *api*.
@@ -136,7 +172,10 @@ var Home = (function(){
 
 ## Singleton
 En Javascript, ce modèle permet le partage de resources. Il permet d'assurer qu'une même référence d'un objet est utilisée dans plusieurs parties de notre application. 
+L'exemple ci-dessous montre un exemple de *singleton*.
 >Exemple:
+Dans cet exemple, ```service``` et ```init``` sont privés. L'on obtient une référence à notre singleton via la méthode publique ```getService```.
+=> Voir dans [jsfiddle](https://jsfiddle.net/jonsom/13vnd8kq/2/).
 ```js
 var LoginService = (function() {
    var service;
@@ -144,10 +183,10 @@ var LoginService = (function() {
         var user;
         return {
             login: function(email, password) {
-                ...
+                //...
             },
             logout: function() {
-                ...
+                //...
                 user = null;
             }
         }
@@ -170,3 +209,74 @@ console.log(serviceA === serviceB); // affiche true
 ## Observer
 C'est un modèle de conception où un objet (le *subjet*) maintient une liste d'objets dépendants (les *observers*) qu'il notifie en cas de changement de son état.
 L'on peut inscrire et désinscrire un objet (*observer*) de ces notifications.
+Dans l'exemple ci-dessous, nous illustrons le modèle par une case à cocher activant et désactivant trois boutons. 
+
+> *Exemple*:
+Dans cet exemple, une case à cocher, le *sujet*, déclenche l'activation et la désactivation de trois boutons selon qu'elle est cochée ou non.
+
+=> Voir dans [jsfiddle](https://jsfiddle.net/jonsom/8np3e6ma/).
+On suppose qu'on a la page ```html```:
+
+```html
+<input type="checkbox" id="check">Toggle buttons
+<button id="button1">Button1</button>
+<button id="button2">Button2</button>
+<button id="button3">Button3</button>
+```
+```js
+// Subject interface
+function Subject() {
+    this.observers = [];
+}
+Subject.prototype.addObserver = function(observer) {
+    this.observers.push(observer);
+}
+Subject.prototype.removeObserver = function(observer) {
+    this.observers.splice(this.observers.indexOf(observer), 1);
+}
+Subject.prototype.notify = function(value) {
+    for(var i = 0; i < this.observers.length; i++){
+        this.observers[i].update(value);
+    }
+}
+
+// Utility function : extend an object with extension
+function extend(obj, extension) {
+    for ( var key in extension ){
+     obj[key] = extension[key];
+  }
+}
+
+var check = document.getElementById("check");
+
+var button1 = document.getElementById("button1");
+var button2 = document.getElementById("button2");
+var button3 = document.getElementById("button3");
+
+function update(checked) {
+	this.disabled = checked;
+}
+
+extend(check, new Subject());
+
+button1.update = update;
+button2.update = update;
+button3.update = update;
+
+
+
+check.onclick = function() {
+	check.notify(check.checked);
+}
+
+check.addObserver(button1);
+check.addObserver(button2);
+check.addObserver(button3);
+```
+### Avantages
+* Découplage entre les objets. Dans ce modèle, l'on peut faire évoluer le *sujet* et les *observers* indépendamment tant qu'ils implémentent toujours les bonnes interfaces.
+* Il rend le code testable car l'interaction entre les objets se fait à travers des interfaces bien précises.
+
+### Inconvénients
+* Le *sujet* doit maintenir une liste des *observers* et doit fournir une interface d'enregistrement et de désinscription. 
+Si nous avons plusieurs sujets dans notre application, chaque sujet implémente une fonctionnalité qui est en fin de compte générique. Cela est résolu par le modèle *publish/subscribe* que nous aborderons par la suite.
