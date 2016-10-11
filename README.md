@@ -5,6 +5,32 @@ Le modèle **Prototype** est un modèle de conception consistant à créer un ob
 Ce modèle est intégré dans Javascript qui est un langage à prototypes.
 En javascript on définit un prototype en créant une fonction *constructeur*. On utilise le mot clé ```this``` pour définir les propriétés dont hériteront les objets créés à partir de ce prototype.
 
+Dans l'exemple ci-dessous, nous créons deux objets ayant la même structure sans utilisation de prototypes.
+
+>Exemple: 
+```js
+var jo = {
+    firstname: 'John',
+    lastname: 'Travolta',
+    age: 45,
+    sex: 'M',
+    fullname: function() {
+        return this.firstname + ' ' + this.lastname;
+    }
+};
+
+var ben = {
+    firstname: 'Benois',
+    lastname: 'Koenig',
+    age: 35,
+    sex: 'M',
+    fullname: function() {
+        return this.firstname + ' ' + this.lastname;
+    }
+}
+```
+En procédant ainsi, nous écrivons plus de lignes de codes et créons la fonctions fullname plusieurs fois. Nous pourrions bien entendu créer la fonction en dehors des objets et l'affecter aux attributs fullname. Une meilleure manière de procéder est de créer un *prototype* et d'instancier les objets en utilisant ce prototype comme présenté ci-dessous:
+
 >Exemple: 
 ```js
 function Person(firstname, lastname, age, sex) {
