@@ -367,3 +367,10 @@ setTimeout( function() {
 },2000); // après 2s
 
 ```
+
+### Avantages
+* Ce modèle a les mêmes avantages que le modèle *observer* avec en plus un découplage plus poussé.
+
+### Inconvénients
+* Le sujet et les *observers* étant très découplés, le sujet ne peut faire aucune action ou supposition basée sur le fait qu'il existe un *observer* pour l'événement publié. Une telle conception doit s'assurer du niveau d'indépendance nécessaire entre le *sujet* et les *observers*.
+
