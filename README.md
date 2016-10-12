@@ -286,7 +286,6 @@ Ce modèle de conception est une variante du modèle *observer*. Il introduit un
 
 >Exemple: L'exemple ci-dessous est une implémentation basique du modèle *publish/subscribe*. => Voir dans [jsfiddle](https://jsfiddle.net/jonsom/vt2bqxLw/).
 
-Supposons que nous avons la page ```html``` suivante: 
 
 ```html
 <div id="alert">
