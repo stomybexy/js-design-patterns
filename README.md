@@ -284,7 +284,7 @@ Si nous avons plusieurs sujets dans notre application, chaque sujet implémente 
 ## Publish/Subscribe
 Ce modèle de conception est une variante du modèle *observer*. Il introduit un *médiateur* entre le *sujet* et l'*observer*. Le *sujet* publie des événements à travers le médiateur qui notifient les *observers* ayant souscrit à cet événement. Le médiateur permet également la désinscription des *observers*.
 
->Exemple: L'exemple ci-dessous est une implémentation basique du modèle *publish/subscribe*. => Voir dans [jsfiddle]().
+>Exemple: L'exemple ci-dessous est une implémentation basique du modèle *publish/subscribe*. => Voir dans [jsfiddle](https://jsfiddle.net/jonsom/vt2bqxLw/).
 
 Supposons que nous avons la page ```html``` suivante: 
 
