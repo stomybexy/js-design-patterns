@@ -285,3 +285,86 @@ Si nous avons plusieurs sujets dans notre application, chaque sujet implémente 
 Ce modèle de conception est une variante du modèle *observer*. Il introduit un *médiateur* entre le *sujet* et l'*observer*. Le *sujet* publie des événements à travers le médiateur qui notifient les *observers* ayant souscrit à cet événement. Le médiateur permet également la désinscription des *observers*.
 
 >Exemple: L'exemple ci-dessous est une implémentation basique du modèle *publish/subscribe*. => Voir dans [jsfiddle]().
+
+Supposons que nous avons la page ```html``` suivante: 
+
+```html
+<div id="alert">
+
+</div>
+```
+
+```js
+var Mediator = (function(){
+	
+	var channels = {}; // Les chaines de souscriptions
+  var chId = 0; // id de souscription
+  
+  return {
+  	subscribe: function(channel, callback) {
+    	if(!channels[channel]) {
+      	channels[channel] = [];
+      }
+      var id= chId++;
+      channels[channel].push({
+      	id: id,
+        callback: callback
+      });
+      return id;
+    },
+    publish: function(channel, args){
+    	if(!channels[channel]) {
+      	return false;
+      }
+      var subscribers = channels[channel];
+      for(var i=0; i< subscribers.length; i++) {
+      	subscribers[i].callback(args);
+      }
+      return this;
+    },
+    unsubscribe: function(id) {
+    	for(var channel in channels) {
+      	if(channels[channel]) {
+        	for(var i = 0; i < channels[channel].length; i++) {
+          	if(channels[channel][i].id === id){
+            	channels[channel].splice(i, 1);
+              return id;
+            }
+          }
+        }
+      }
+      return this;
+    }
+  }
+})();
+
+var alertHandler = function(alert){
+	console.log(alert);
+	document.getElementById("alert").innerHTML  = alert.message;
+}
+
+var id = Mediator.subscribe("alert", alertHandler);
+console.log("Subscription id", id);
+
+var displayAlert = function(message){
+
+		Mediator.publish("alert", {message:message});
+}
+
+setTimeout( function() {
+	displayAlert("My first alert");
+}, 100); // après 100ms
+
+setTimeout( function() {
+	displayAlert("My second alert");
+},1000); // après 1sec
+
+setTimeout(function() {
+	Mediator.unsubscribe(id);
+}, 1200); // après 1sec200ms
+
+setTimeout( function() {
+	displayAlert("This will be ignored");
+},2000); // après 2s
+
+```
