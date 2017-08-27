@@ -1,6 +1,6 @@
 # Modèles de conception en Javascript
 
-*auteur*: Jonatan SOMBIE
+*Auteur*: *Jonatan SOMBIE*
 
 ## Prototype
 Le modèle **Prototype** est un modèle de conception consistant à créer un objet à partir d'un patron dont il est le clone. Cet objet *patron* est le prototype de l'objet créé. 
