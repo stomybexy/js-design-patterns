@@ -1,5 +1,7 @@
 # Modèles de conception en Javascript
 
+*auteur*: Jonatan SOMBIE
+
 ## Prototype
 Le modèle **Prototype** est un modèle de conception consistant à créer un objet à partir d'un patron dont il est le clone. Cet objet *patron* est le prototype de l'objet créé. 
 Ce modèle est intégré dans Javascript qui est un langage à prototypes.
@@ -373,4 +375,8 @@ setTimeout( function() {
 
 ### Inconvénients
 * Le sujet et les *observers* étant très découplés, le sujet ne peut faire aucune action ou supposition basée sur le fait qu'il existe un *observer* pour l'événement publié. Une telle conception doit s'assurer du niveau d'indépendance nécessaire entre le *sujet* et les *observers*.
+
+
+* Références * : 
+* **[Learning JavaScript Design Patterns - Volume 1.7.0](https://addyosmani.com/resources/essentialjsdesignpatterns/book/)** by *Addy Osmani* 
 
